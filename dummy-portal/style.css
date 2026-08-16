@@ -1,0 +1,213 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f2;
+    color: #333;
+}
+
+h1 {
+    background-color: #2e7d32;
+    color: white;
+    margin: 0;
+    padding: 25px;
+    text-align: center;
+}
+
+nav {
+    background-color: #1b5e20;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    gap: 35px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+main h2 {
+    font-size: 28px;
+    color: #2e7d32;
+}
+
+main p {
+    font-size: 18px;
+}
+.services {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    width: 250px;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: #2e7d32;
+    font-size: 20px;
+}
+
+.card p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.card button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background-color: #1b5e20;
+}
+.issue-section {
+    margin: 60px auto 30px;
+    padding: 30px;
+    max-width: 700px;
+    background-color: #e8f5e9;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.issue-section h2 {
+    color: #2e7d32;
+}
+
+.issue-section p {
+    margin-bottom: 20px;
+}
+
+.report-btn {
+    background-color: #d84315;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.report-btn:hover {
+    background-color: #bf360c;
+}
+.issue-form {
+    display: none;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.issue-form h2 {
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.issue-form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.issue-form select,
+.issue-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.issue-form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.submit-btn {
+    display: block;
+    margin: 20px auto 0;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    background-color: #1b5e20;
+}
+.incident-card {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: white;
+    border-left: 6px solid #d84315;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.incident-card h3 {
+    color: #d84315;
+}
+
+.ai-analysis {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f1f8e9;
+    border-radius: 10px;
+}
+
+.ai-analysis h2 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 30px;
+}
+
+.analysis-item {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #66bb6a;
+}
+
+.analysis-item h3 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+.analysis-item p {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
