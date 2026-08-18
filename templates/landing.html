@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM-KISAN Portal - Landing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=3">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+    <a class="skip-link" href="#mainContent">Skip to main content</a>
+
+    <div class="national-strip">
+        <div class="s-orange"></div>
+        <div class="s-white"></div>
+        <div class="s-green"></div>
+    </div>
+
+    <header class="official-header">
+        <div class="container header-grid">
+            <div class="emblem-box">
+                <div class="emblem-icon"></div>
+                <div>
+                    <h1>भारत सरकार |</h1>
+                       <h2> Government of India </h2>
+                    <h3>कृषि एवं किसान कल्याण मंत्रालय</h3>
+                    <h4>Ministry of Agriculture & Farmers Welfare</h4>
+                </div>
+            </div>
+            <div class="portal-identity">
+                <span class="portal-name">PM-KISAAN SAMMAN NIDHI</span>
+                <span class="portal-tag">Direct Benefit Transfer (DBT) Citizen Portal</span>
+                <div class="header-links">
+                    <span class="helpline-badge">📞 Helpline: 155261 / 1800-115-526</span>
+                     
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="site-nav">
+        <div class="container nav-inner">
+            <a class="nav-brand" href="/">PM-KISAAN Portal</a>
+            <div class="nav-links">
+                <a href="/landing" class="nav-link">Home</a>
+                <a href="/intro" class="nav-link">About</a>
+                <a href="/register" class="nav-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="mainContent" class="container main-content">
+        <section class="landing-hero">
+            <h2>Welcome to PM-KISAN Samman Nidhi</h2>
+            <p class="lead">An inclusive, secure, and accessible portal to help eligible farmers receive timely Direct Benefit Transfers (DBT) and support services.</p>
+            <div class="cta-row">
+                <a class="btn-primary" href="/register">Register Now</a>
+                <a class="btn-subtle" href="/intro">Learn About Our Mission</a>
+            </div>
+        </section>
+
+        <section class="mission-vision">
+            <div class="grid-2">
+                <div>
+                    <h3>Our Mission</h3>
+                    <p>To empower small and marginal farmers by providing a secure, transparent channel for benefit disbursement, easy registration, and responsive support — all while protecting citizens' privacy with a zero-PII-first design.</p>
+                    <ul>
+                        <li>Ensure timely DBT transfers</li>
+                        <li>Provide intuitive registration and e-KYC</li>
+                        <li>Protect farmer data and privacy</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Our Vision</h3>
+                    <p>To build a resilient, trustworthy digital public service that reaches every farmer — reducing friction, preventing fraud, and enabling equitable access to government schemes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h3>What We Offer</h3>
+            <div class="grid-3">
+                <div class="feature">
+                    <h4>->Secure Registration</h4>
+                    <p>Guided forms with built-in checks and privacy-first sanitization for safer onboarding.</p>
+                </div>
+                <div class="feature">
+                    <h4>->AI-Assisted Help</h4>
+                    <p>GovFix AI helps diagnose common issues and suggests non-sensitive remedies in real time.</p>
+                </div>
+                <div class="feature">
+                    <h4>->Officer Support</h4>
+                    <p>Admin portal for authorized officers to assist, escalate, and verify complex cases.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+                    <h1><small><a href="/admin" target="_blank" class="admin-link">Officer / Admin Portal</a></small></h1>
+            <small>© Government of India — PM-KISAN Samman Nidhi</small>
+        </div>
+    </footer>
+
+</body>
+</html>

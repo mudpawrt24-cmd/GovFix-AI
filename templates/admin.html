@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovFix AI - Officer & Admin Control Room</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=3">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <style>
+        .admin-layout { margin-top: 24px; margin-bottom: 80px; }
+        .admin-hero { background: var(--gov-navy-dark); color: white; padding: 24px; border-radius: var(--radius); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+        .admin-hero h2 { font-size: 20px; }
+        .admin-hero p { font-size: 13px; color: #cbd5e1; margin-top: 4px; }
+        .override-card { border-left: 4px solid #ef4444; background: #fff5f5; padding: 18px; border-radius: var(--radius); margin-bottom: 24px; border: 1px solid #fecaca; }
+        .override-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .btn-override { background: #dc2626; color: white; padding: 8px 16px; font-size: 13px; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; }
+        .btn-override:hover { background: #b91c1c; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+        .data-table th, .data-table td { border: 1px solid var(--gov-border); padding: 10px 12px; text-align: left; }
+        .data-table th { background: var(--gov-navy-primary); color: white; font-weight: 600; }
+        .data-table tr:nth-child(even) { background: #f8fafc; }
+        .badge-approved { background: #dcfce7; color: #166534; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; }
+    </style>
+</head>
+<body>
+
+    <div class="national-strip">
+        <div class="s-orange"></div><div class="s-white"></div><div class="s-green"></div>
+    </div>
+
+    <header class="official-header">
+        <div class="container header-grid">
+            <div class="emblem-box">
+                <div class="emblem-icon"></div>
+                <div>
+                    <h1>GovFix AI Officer Control Room</h1>
+                    <h2>Tehsil & Nodal Officer Direct Action Dashboard</h2>
+                </div>
+            </div>
+            {% if admin_authenticated %}
+            <div style="display:flex; gap:12px; align-items:center;">
+                <span style="font-size:13px; color:#0f172a;">Signed in as <strong>{{ admin_user }}</strong></span>
+                <button class="btn-subtle" id="btnLogout">Sign Out</button>
+                <a href="/" class="btn-subtle">⬅ Return to Citizen Portal</a>
+            </div>
+            {% else %}
+            <a href="/" class="btn-subtle">⬅ Return to Citizen Portal</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="container admin-layout">
+        
+        <div class="admin-hero">
+            <div>
+                <h2>Centralized Problem Escalation & Override Center</h2>
+                <p>Empowering administrative officers to unblock complex land disputes and override technical glitches directly.</p>
+            </div>
+            <button class="btn-subtle" onclick="location.reload()">🔄 Refresh Live Data</button>
+        </div>
+        {% if admin_authenticated %}
+        <!-- 1. Complex Escalations & Manual Override Tool -->
+        <div class="wizard-card" style="margin-bottom: 24px;">
+            <div class="override-header">
+                <div>
+                    <h3>🚨 Difficult & Disputed Cases (Requires Direct Admin Action)</h3>
+                    <p class="subtitle">If a citizen's problem cannot be fixed automatically, officers can force-approve here.</p>
+                </div>
+                <span class="helpline-badge">Human-in-the-Loop Active</span>
+            </div>
+
+            <div id="escalationContainer">
+                {% for esc in data.admin_escalations %}
+                <div class="override-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Escalation ID: {{ esc.escalation_id }}</strong> | Farmer: <strong>{{ esc.farmer_name }}</strong> (Aadhaar: {{ esc.aadhaar_masked }})
+                            <p style="color: #991b1b; font-size: 13px; margin-top: 4px;"><strong>Reason:</strong> {{ esc.issue_type }} (Khasra: {{ esc.khasra_no }})</p>
+                        </div>
+                        <div>
+                            {% if esc.status == 'PENDING_OFFICER_ACTION' %}
+                            <button class="btn-override" onclick="executeAdminOverride('{{ esc.escalation_id }}')">
+                                ⚡ Force Approve & Clear Dispute
+                            </button>
+                            {% else %}
+                            <span class="badge-approved">✅ Resolved via Override</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% else %}
+        <!-- Admin Authentication Forms -->
+        <div class="wizard-card" style="margin-bottom:24px; max-width:640px;">
+            <h3>Officer Sign In</h3>
+            <p class="subtitle">Admin accounts are invite-only. Contact your Tehsildar to obtain an admin account.</p>
+            <div style="max-width:420px; margin-top:12px;">
+                <label>Username</label>
+                <input id="adminSignInUser" type="text" />
+                <label>Password</label>
+                <input id="adminSignInPass" type="password" />
+                <button class="btn-pay" id="adminSignInBtn">Sign In</button>
+                <div id="adminSignInMsg" style="margin-top:8px;color:#b91c1c;font-size:13px;"></div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 2. Registered Farmers Table -->
+        <div class="wizard-card" style="margin-bottom: 24px;">
+            <h3>🌾 Live Registered Farmers Database</h3>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Reg ID</th>
+                            <th>Farmer Full Name</th>
+                            <th>Aadhaar</th>
+                            <th>Khasra No</th>
+                            <th>Status</th>
+                            <th>Admin Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for farmer in data.registered_farmers %}
+                        <tr>
+                            <td><strong>{{ farmer.registration_id }}</strong></td>
+                            <td>{{ farmer.name }}</td>
+                            <td>{{ farmer.aadhaar_masked }}</td>
+                            <td>{{ farmer.khasra_no }}</td>
+                            <td><span class="badge-approved">{{ farmer.status }}</span></td>
+                            <td><small>{{ farmer.admin_notes }}</small></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. Zero-PII Telemetry Proof -->
+        <div class="wizard-card">
+            <h3>🛡️ Live Zero-PII Telemetry Audit Log</h3>
+            <p class="subtitle">Proof that no citizen personal data reaches the AI diagnostics cluster.</p>
+            <div style="overflow-x: auto; max-height: 350px;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Error Category</th>
+                            <th>Sanitized Telemetry (Redacted)</th>
+                            <th>Action Executed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log in data.telemetry_audit_logs %}
+                        <tr>
+                            <td><small>{{ log.timestamp }}</small></td>
+                            <td><strong>{{ log.predicted_category }}</strong></td>
+                            <td style="font-family: monospace; color: #0f172a;">{{ log.sanitized_telemetry }}</td>
+                            <td><small>{{ log.action_recommended }}</small></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: #64748b;">No errors intercepted yet. Actions on citizen portal will log here live.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        async function executeAdminOverride(escId) {
+            const confirmed = confirm(`Are you sure you want to perform a Direct Administrative Override for ${escId}?`);
+            if (!confirmed) return;
+
+            const res = await fetch("/api/admin/override-approve", {
+                method: "POST",
+                    headers: { "Content-Type": "application/json", "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content },
+                body: JSON.stringify({
+                    escalation_id: escId,
+                    notes: "Approved via Tehsil Officer Administrative Override (Physical verification bypass)"
+                })
+            });
+
+            const data = await res.json();
+            alert("✅ " + data.message);
+            location.reload();
+        }
+    </script>
+    <script>
+        // Admin auth handlers (only present on admin page)
+        document.addEventListener('DOMContentLoaded', () => {
+            const signInBtn = document.getElementById('adminSignInBtn');
+            const signUpBtn = document.getElementById('adminSignUpBtn');
+            const logoutBtn = document.getElementById('btnLogout');
+
+            const csrf = document.querySelector('meta[name="csrf-token"]') ? document.querySelector('meta[name="csrf-token"]').content : '';
+            if (signInBtn) signInBtn.addEventListener('click', async () => {
+                const user = document.getElementById('adminSignInUser').value;
+                const pass = document.getElementById('adminSignInPass').value;
+                const res = await fetch('/admin/login', {method:'POST', headers:{'Content-Type':'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({username:user,password:pass})});
+                const data = await res.json();
+                if (res.ok) { location.reload(); } else { document.getElementById('adminSignInMsg').innerText = data.message || 'Sign in failed'; }
+            });
+
+            if (signUpBtn) signUpBtn.addEventListener('click', async () => {
+                const user = document.getElementById('adminSignUpUser').value;
+                const pass = document.getElementById('adminSignUpPass').value;
+                const res = await fetch('/admin/signup', {method:'POST', headers:{'Content-Type':'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({username:user,password:pass})});
+                const data = await res.json();
+                if (res.status === 201) {
+                    // Show verification link for dev testing
+                    const token = data.verification_token;
+                    const link = `${location.origin}/admin/verify/${token}`;
+                    document.getElementById('adminSignUpMsg').innerHTML = `Admin created — verify: <a href="${link}" target="_blank">${link}</a>`;
+                } else { document.getElementById('adminSignUpMsg').innerText = data.message || 'Could not create admin'; }
+            });
+
+            if (logoutBtn) logoutBtn.addEventListener('click', async () => {
+                await fetch('/admin/logout', {method:'POST', headers: {'X-CSRF-Token': csrf}});
+                location.reload();
+            });
+        });
+    </script>
+</body>
+</html>
