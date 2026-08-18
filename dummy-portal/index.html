@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisaan Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Kisaan Portal</h1>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Schemes</a>
+            <a href="#">Services</a>
+            <a href="#">Applications</a>
+            <a href="#">Help</a>
+        </nav>
+    </header>
+
+    <main>
+    <h2>Welcome to the Government Farmer Services Portal</h2>
+    <p>Access agricultural schemes, services and applications in one place.</p>
+
+    <section class="services">
+        <div class="card">
+            <h3>🌾 Government Schemes</h3>
+            <p>Explore agricultural schemes and benefits available for farmers.</p>
+            <button>View Schemes</button>
+        </div>
+
+        <div class="card">
+            <h3>📄 My Applications</h3>
+            <p>View and manage your submitted applications.</p>
+            <button>View Applications</button>
+        </div>
+
+        <div class="card">
+            <h3>🔍 Application Status</h3>
+            <p>Check the current status of your application.</p>
+            <button>Check Status</button>
+        </div>
+    </section>
+    <section class="issue-section">
+    <h2>Having Trouble?</h2>
+    <p>Report an issue with a government service and get assistance.</p>
+    <button class="report-btn" onclick="showIssueForm()">Report an Issue</button>
+</section>
+</main>
+<div id="issue-form" class="issue-form">
+    <h2>Report a Portal Issue</h2>
+
+    <label for="issue-type">Issue Type</label>
+    <select id="issue-type">
+        <option>Application Error</option>
+        <option>Payment Issue</option>
+        <option>Login Problem</option>
+        <option>Document Upload Issue</option>
+        <option>Other</option>
+    </select>
+
+    <label for="issue-description">Describe the issue</label>
+    <textarea id="issue-description" placeholder="Tell us what went wrong..."></textarea>
+
+    <button class="submit-btn" onclick="submitIssue()">Submit Issue</button>
+</div>
+
+<script>
+    function showIssueForm() {
+        document.getElementById("issue-form").style.display = "block";
+    }
+
+    function submitIssue() {
+        window.location.href = "investigation.html";
+    }
+</script>
+
+</body>
+</html>
