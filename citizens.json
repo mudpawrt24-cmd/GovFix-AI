@@ -1,0 +1,7 @@
+{
+  "9876543211": {
+    "name": "Test Farmer",
+    "password_hash": "scrypt:32768:8:1$B2MQFKynswIEmoxI$f2bc8a3dcf75bda053176cd2f6a4b51fa35b57169091c28c70cc704585acd184cb2c1037f715c4a6f73917a0404d6b0670fda7e5e2a5cca41eb9b4eb0348e567",
+    "created": "2026-08-17T04:44:49.718780"
+  }
+}

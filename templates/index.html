@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM-KISAAN Samman Nidhi | New Farmer Enrollment Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=3">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+</head>
+<body>
+
+    <a class="skip-link" href="#mainContent">Skip to main content</a>
+
+    <!-- National Tiranga Bar -->
+    <div class="national-strip">
+        <div class="s-orange"></div>
+        <div class="s-white"></div>
+        <div class="s-green"></div>
+    </div>
+
+    <!-- Official Header -->
+     <header class="official-header">
+        <div class="container header-grid">
+            <div class="emblem-box">
+                <div class="emblem-icon"></div>
+                <div>
+                    <h1>भारत सरकार |</h1>
+                       <h2> Government of India </h2>
+                    <h3>कृषि एवं किसान कल्याण मंत्रालय</h3>
+                    <h4>Ministry of Agriculture & Farmers Welfare</h4>
+                </div>
+            </div>
+            <div class="portal-identity">
+                <span class="portal-name">PM-KISAAN SAMMAN NIDHI</span>
+                <span class="portal-tag">Direct Benefit Transfer (DBT) Citizen Portal</span>
+                <div class="header-links">
+                    <span class="helpline-badge">📞 Helpline: 155261 / 1800-115-526</span>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Site Navigation -->
+    <nav class="site-nav">
+        <div class="container nav-inner">
+            <a class="nav-brand" href="/">PM-KISAAN Portal</a>
+            <div class="nav-links">
+                <a href="/landing" class="nav-link">Home</a>
+                <a href="/intro" class="nav-link">About</a>
+                <a href="#section-identity" class="nav-link">Identity</a>
+                <a href="#section-land" class="nav-link">Land</a>
+                <a href="#section-ekyc" class="nav-link">e-KYC</a>
+                <a href="#form-actions" class="nav-link">Submit</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Warm Empathetic Farmer Banner -->
+    <div class="container banner-container">
+        <div class="empathy-banner">
+            <div class="banner-text">
+                <h3>किसान सम्मान एवं सहायता केंद्र | Farmer Help & Service Desk</h3>
+                <p>We are dedicated to ensuring a hassle-free registration experience for every farmer. If any technical difficulty occurs, our intelligent <strong>GovFix AI Companion</strong> is active to protect your data and assist you in real time.</p>
+            </div>
+            <div class="system-status-chip">
+                <span class="pulse-green"></span> GovFix AI Active & Guarding
+            </div>
+        </div>
+    </div>
+
+    <!-- Citizen Auth Quick Actions -->
+    <div class="citizen-auth" aria-label="Citizen authentication">
+    <div class="container citizen-auth-container">
+
+        <div id="citizenAuthInline" class="citizen-auth-form">
+
+            <div class="auth-field">
+                <label for="citizenMobile">Mobile Number</label>
+                <input
+                    id="citizenMobile"
+                    type="tel"
+                    inputmode="numeric"
+                    placeholder="10-digit mobile number"
+                    maxlength="10"
+                    pattern="[0-9]{10}"
+                    autocomplete="tel"
+                    required
+                />
+            </div>
+
+            <div class="auth-field">
+                <label for="citizenPass">Password</label>
+                <input
+                    id="citizenPass"
+                    type="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required
+                />
+            </div>
+
+            <button class="btn-pay" id="citizenSignInBtn" type="button">
+                Sign In
+            </button>
+
+            <button class="btn-subtle" id="citizenSignUpBtn" type="button">
+                Sign Up
+            </button>
+
+            <button
+                class="btn-subtle"
+                id="citizenSignOutBtn"
+                type="button"
+                style="display: none;"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+    <!-- Main Registration Card -->
+    <div class="container main-content" id="mainContent">
+        <main class="wizard-card">
+            
+            <div class="wizard-header">
+                <div>
+                    <h2>New Farmer Registration & e-KYC</h2>
+                    <p class="subtitle">नया किसान पंजीकरण एवं ई-केवाईसी सत्यापन (Scheme Year 2026-27)</p>
+                </div>
+                <div class="step-badge">Application Form 4-A</div>
+            </div>
+
+            <!-- Step Progress Indicator -->
+            <div class="step-wizard">
+                <div class="step-item active">
+                    <span class="step-circle">1</span>
+                    <span class="step-label">Farmer Identity</span>
+                </div>
+                <div class="step-line active"></div>
+                <div class="step-item active">
+                    <span class="step-circle">2</span>
+                    <span class="step-label">Land Records</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item">
+                    <span class="step-circle">3</span>
+                    <span class="step-label">e-KYC & Fee</span>
+                </div>
+            </div>
+
+            <form id="kisanForm" onsubmit="event.preventDefault();">
+                
+                <!-- Section 1: Farmer Identity -->
+                <div id="section-identity" class="form-section collapsible" aria-expanded="true">
+                    <div class="section-title">
+                        <span class="step-num">1</span>
+                        <div>
+                            <h3>Farmer Identity & Banking Information</h3>
+                            <p class="section-sub">किसान की व्यक्तिगत एवं बैंक खाता जानकारी</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label for="aadhaarNum">Aadhaar Number (आधार संख्या) <span class="req">*</span></label>
+                            <input type="text" id="aadhaarNum" placeholder="12-digit Aadhaar" maxlength="14" value="8821 4490 1234">
+                            <small class="field-hint">UIDAI registered 12-digit number</small>
+                        </div>
+                        <div class="input-group">
+                            <label for="farmerName">Farmer Full Name (किसान का नाम) <span class="req">*</span></label>
+                            <input type="text" id="farmerName" placeholder="As printed on Aadhaar card" value="Rameshwar Prasad Patel">
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label for="mobileNum">Mobile Number (मोबाइल नंबर) <span class="req">*</span></label>
+                            <input type="tel" id="mobileNum" placeholder="10-digit registered number" maxlength="10" value="9876543210">
+                        </div>
+                        <div class="input-group">
+                            <label for="bankAcc">Bank Account Number (खाता संख्या) <span class="req">*</span></label>
+                            <input type="text" id="bankAcc" placeholder="DBT-enabled savings account" value="50100491823901">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Land Records (Natural Errors Happen Here) -->
+                <div id="section-land" class="form-section collapsible" aria-expanded="true">
+                    <div class="section-title">
+                        <span class="step-num">2</span>
+                        <div>
+                            <h3>Land Holding Details & Document Upload</h3>
+                            <p class="section-sub">भूमि का विवरण एवं खतौनी दस्तावेज़ अपलोड</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label for="khasraNum">Khasra / Khata Number (खसरा संख्या) <span class="req">*</span></label>
+                            <input type="text" id="khasraNum" placeholder="e.g. 142/9" value="142-INVALID-FORMAT" onblur="validateKhasraOnBlur()">
+                            <small class="field-hint">Must follow registry standard format (e.g. 142/9)</small>
+                        </div>
+                        <div class="input-group">
+                            <label for="landDocFile">Upload Land Document / Khatauni Copy <span class="req">*</span></label>
+                            <input type="file" id="landDocFile" accept="image/*,.pdf" onchange="uploadDocumentNaturally(this)">
+                            <small class="field-hint">Portal limit: Strictly under 100 KB (Select any photo to test auto-compression)</small>
+                            <div id="uploadBadge" class="upload-badge hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: e-KYC Verification Fee -->
+                <div id="section-ekyc" class="form-section collapsible" aria-expanded="true">
+                    <div class="section-title">
+                        <span class="step-num">3</span>
+                        <div>
+                            <h3>Mandatory e-KYC Verification</h3>
+                            <p class="section-sub">डीबीटी आधार ब्रिज सत्यापन शुल्क</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ekyc-bar">
+                        <div class="ekyc-info">
+                            <strong>Processing Fee: ₹15.00</strong>
+                            <p>Required for NPCI Aadhaar-DBT bridge activation</p>
+                        </div>
+                        <button type="button" id="payEkycBtn" class="btn-pay" onclick="payEkycNaturally()">
+                            💳 Pay ₹15 & Authorize e-KYC
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section 4: Final Submission -->
+                <div id="form-actions" class="form-actions">
+                    <button type="button" id="submitBtn" class="btn-primary" onclick="submitFormNaturally()">
+                        Submit Application & Enroll (पंजीकरण जमा करें)
+                    </button>
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <!-- Floating GovFix AI Assistant Drawer (Slides up dynamically on errors) -->
+    <div id="govfixWidget" class="govfix-dock hidden">
+        <div class="dock-header">
+            <div class="ai-branding">
+                <span class="ai-pulse"></span>
+                <strong>GovFix Kisan Mitra (किसान साथी)</strong>
+            </div>
+            <button class="close-btn" onclick="dismissGovFix()">✕</button>
+        </div>
+        <div class="dock-body">
+            <div id="aiCard" class="ai-card alert">
+                <!-- Dynamic AI Explanations and 1-Click Fix Buttons Appear Here -->
+            </div>
+            <div class="pii-shield-box">
+                <div class="shield-header">
+                    <span><strong>Zero-PII Privacy Firewall Active</strong></span>
+                </div>
+                <div id="sanitizedTelemetryBox" class="telemetry-console"></div>
+                <small class="pii-note">Aadhaar, Mobile & Bank numbers are redacted locally before AI diagnosis.</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Official Footer -->
+    <footer class="official-footer">
+        <div class="container footer-content">
+            <p>Designed and maintained for Indian E-Governance Portals | Integrated with GovFix AI Diagnostics Engine</p>
+            <p>© 2026 Ministry of Agriculture & Farmers Welfare, Government of India.</p>
+        </div>
+    </footer>
+
+    <script src="/static/govfix.js?v=3"></script>
+</body>
+</html>
